@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <!-- see:
+    https://docs.oracle.com/cd/E24329_01/web.1211/e21049/web_xml.htm
+    https://www.owasp.org/index.php/Servlet_spec_-_web.xml
+    -->
+
+    <display-name>net.cryptonomica.tomcatweb3j</display-name>
+
+    <!-- SERVLETS BEGIN -->
+    <servlet>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>net.cryptonomica.tomcatweb3j.TestServlet</servlet-class>
+        <!--<load-on-startup>1</load-on-startup>-->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/TestServlet</url-pattern>
+    </servlet-mapping>
+    <!-- SERVLETS END -->
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+</web-app>

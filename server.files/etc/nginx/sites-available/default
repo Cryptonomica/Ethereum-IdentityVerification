@@ -1,0 +1,43 @@
+## this file:
+#  /etc/nginx/sites-available/default
+#
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+# -------------- My Settings START: ----------
+
+# HTTP server
+# see: http://serverfault.com/a/337893
+# https://serverfault.com/questions/67316/in-nginx-how-can-i-rewrite-all-http-requests-to-https-while-maintaining-sub-dom/337893#337893
+server {
+       listen         80;
+       server_name    tomcatweb3j.cryptonomica.net;
+       return         301 https://$server_name$request_uri;
+}
+
+# HTTPS server
+# http://nginx.org/en/docs/http/configuring_https_servers.html
+server {
+    listen 443 ssl;
+    server_name tomcatweb3j.cryptonomica.net;
+    # add Strict-Transport-Security to prevent man in the middle attacks
+    add_header Strict-Transport-Security "max-age=31536000";
+
+    ssl_certificate /etc/nginx/SSL/certificate.pem;
+    ssl_certificate_key /etc/nginx/SSL/privatekey.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+   }
+
+}
+# -------------- My Settings END: ----------

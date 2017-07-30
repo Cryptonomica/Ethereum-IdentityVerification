@@ -19,6 +19,24 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--<dependency>-->
+        <!--<groupId>org.bouncycastle</groupId>-->
+        <!--<artifactId>bcpg-jdk15on</artifactId>-->
+        <!--&lt;!&ndash;<version>1.54</version>&ndash;&gt;-->
+        <!--&lt;!&ndash; was a bug reading userID in key DSA + ElGamal in BC 1.54 &ndash;&gt;-->
+        <!--&lt;!&ndash;<version>1.47</version>&ndash;&gt;-->
+        <!--&lt;!&ndash; change to 1.54 as in web3j BC dependency&ndash;&gt;-->
+        <!--<version>1.54</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--&lt;!&ndash; https://github.com/justinludwig/jpgpj &ndash;&gt;-->
+        <!--<groupId>org.c02e.jpgpj</groupId>-->
+        <!--<artifactId>jpgpj</artifactId>-->
+        <!--<version>0.1</version>-->
+        <!--</dependency>-->
+        <!---->
+
         <!-- https://github.com/web3j/web3j#maven -->
         <dependency>
             <groupId>org.web3j</groupId>

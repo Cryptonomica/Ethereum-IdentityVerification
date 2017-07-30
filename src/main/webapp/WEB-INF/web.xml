@@ -22,6 +22,17 @@
         <servlet-name>TestServlet</servlet-name>
         <url-pattern>/TestServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetVerification</servlet-name>
+        <servlet-class>net.cryptonomica.tomcatweb3j.GetVerification</servlet-class>
+        <!--<load-on-startup>1</load-on-startup>-->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetVerification</servlet-name>
+        <url-pattern>/getVerification</url-pattern>
+    </servlet-mapping>
     <!-- SERVLETS END -->
 
     <welcome-file-list>

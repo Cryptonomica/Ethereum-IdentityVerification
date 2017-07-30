@@ -3,7 +3,7 @@ pragma solidity ^0.4.11;
 
 contract CryptonomicaVerify {
 
-    // verifications: (acc => (verificationId => verificactioData)
+    // verifications: (acc => (verificationId => verificationData)
     mapping (address => mapping (uint => Verification)) public verification;
     // counter for verifications for acc
     mapping (address => uint) public numberOfVerifications; // this number is verification Id

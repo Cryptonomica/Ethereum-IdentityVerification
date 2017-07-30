@@ -1,20 +1,10 @@
 package net.cryptonomica.tomcatweb3j;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
 import org.web3j.abi.EventEncoder;
 import org.web3j.abi.EventValues;
+import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.TypeReference;
-import org.web3j.abi.datatypes.Address;
-import org.web3j.abi.datatypes.Bool;
-import org.web3j.abi.datatypes.Event;
-import org.web3j.abi.datatypes.Function;
-import org.web3j.abi.datatypes.Type;
-import org.web3j.abi.datatypes.Utf8String;
+import org.web3j.abi.datatypes.*;
 import org.web3j.abi.datatypes.generated.Bytes32;
 import org.web3j.abi.datatypes.generated.Uint256;
 import org.web3j.crypto.Credentials;
@@ -23,16 +13,25 @@ import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.methods.request.EthFilter;
 import org.web3j.protocol.core.methods.response.Log;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.protocol.exceptions.TransactionTimeoutException;
 import org.web3j.tx.Contract;
 import org.web3j.tx.TransactionManager;
 import rx.Observable;
 import rx.functions.Func1;
 
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+
 /**
  * Auto generated code.<br>
  * <strong>Do not modify!</strong><br>
  * Please use {@link org.web3j.codegen.SolidityFunctionWrapperGenerator} to update.
- *
+ * <p>
  * <p>Generated with web3j version 2.2.1.
  */
 public final class CryptonomicaVerify extends Contract {
@@ -47,9 +46,13 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public List<StringToSignRequestedEventResponse> getStringToSignRequestedEvents(TransactionReceipt transactionReceipt) {
-        final Event event = new Event("StringToSignRequested", 
+        final Event event = new Event("StringToSignRequested",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Utf8String>() {}, new TypeReference<Uint256>() {}, new TypeReference<Bytes32>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Utf8String>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Bytes32>() {
+                }));
         List<EventValues> valueList = extractEventParameters(event, transactionReceipt);
         ArrayList<StringToSignRequestedEventResponse> responses = new ArrayList<StringToSignRequestedEventResponse>(valueList.size());
         for (EventValues eventValues : valueList) {
@@ -64,9 +67,13 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Observable<StringToSignRequestedEventResponse> stringToSignRequestedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
-        final Event event = new Event("StringToSignRequested", 
+        final Event event = new Event("StringToSignRequested",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Utf8String>() {}, new TypeReference<Uint256>() {}, new TypeReference<Bytes32>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Utf8String>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Bytes32>() {
+                }));
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return web3j.ethLogObservable(filter).map(new Func1<Log, StringToSignRequestedEventResponse>() {
@@ -84,9 +91,14 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public List<SignedStringUploadedEventResponse> getSignedStringUploadedEvents(TransactionReceipt transactionReceipt) {
-        final Event event = new Event("SignedStringUploaded", 
+        final Event event = new Event("SignedStringUploaded",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Uint256>() {}, new TypeReference<Bool>() {}, new TypeReference<Utf8String>() {}, new TypeReference<Utf8String>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Bool>() {
+                }, new TypeReference<Utf8String>() {
+                }, new TypeReference<Utf8String>() {
+                }));
         List<EventValues> valueList = extractEventParameters(event, transactionReceipt);
         ArrayList<SignedStringUploadedEventResponse> responses = new ArrayList<SignedStringUploadedEventResponse>(valueList.size());
         for (EventValues eventValues : valueList) {
@@ -102,9 +114,14 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Observable<SignedStringUploadedEventResponse> signedStringUploadedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
-        final Event event = new Event("SignedStringUploaded", 
+        final Event event = new Event("SignedStringUploaded",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Uint256>() {}, new TypeReference<Bool>() {}, new TypeReference<Utf8String>() {}, new TypeReference<Utf8String>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Bool>() {
+                }, new TypeReference<Utf8String>() {
+                }, new TypeReference<Utf8String>() {
+                }));
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return web3j.ethLogObservable(filter).map(new Func1<Log, SignedStringUploadedEventResponse>() {
@@ -123,9 +140,16 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public List<VerificationAddedEventResponse> getVerificationAddedEvents(TransactionReceipt transactionReceipt) {
-        final Event event = new Event("VerificationAdded", 
+        final Event event = new Event("VerificationAdded",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Utf8String>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}, new TypeReference<Utf8String>() {}, new TypeReference<Uint256>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Utf8String>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Utf8String>() {
+                }, new TypeReference<Uint256>() {
+                }));
         List<EventValues> valueList = extractEventParameters(event, transactionReceipt);
         ArrayList<VerificationAddedEventResponse> responses = new ArrayList<VerificationAddedEventResponse>(valueList.size());
         for (EventValues eventValues : valueList) {
@@ -143,9 +167,16 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Observable<VerificationAddedEventResponse> verificationAddedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
-        final Event event = new Event("VerificationAdded", 
+        final Event event = new Event("VerificationAdded",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Utf8String>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}, new TypeReference<Utf8String>() {}, new TypeReference<Uint256>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Utf8String>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Utf8String>() {
+                }, new TypeReference<Uint256>() {
+                }));
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return web3j.ethLogObservable(filter).map(new Func1<Log, VerificationAddedEventResponse>() {
@@ -166,9 +197,13 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public List<VerificationRevokedEventResponse> getVerificationRevokedEvents(TransactionReceipt transactionReceipt) {
-        final Event event = new Event("verificationRevoked", 
+        final Event event = new Event("verificationRevoked",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}, new TypeReference<Utf8String>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Utf8String>() {
+                }));
         List<EventValues> valueList = extractEventParameters(event, transactionReceipt);
         ArrayList<VerificationRevokedEventResponse> responses = new ArrayList<VerificationRevokedEventResponse>(valueList.size());
         for (EventValues eventValues : valueList) {
@@ -183,9 +218,13 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Observable<VerificationRevokedEventResponse> verificationRevokedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
-        final Event event = new Event("verificationRevoked", 
+        final Event event = new Event("verificationRevoked",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}, new TypeReference<Utf8String>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Utf8String>() {
+                }));
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return web3j.ethLogObservable(filter).map(new Func1<Log, VerificationRevokedEventResponse>() {
@@ -203,9 +242,11 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public List<ManagerAddedEventResponse> getManagerAddedEvents(TransactionReceipt transactionReceipt) {
-        final Event event = new Event("ManagerAdded", 
+        final Event event = new Event("ManagerAdded",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Address>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Address>() {
+                }));
         List<EventValues> valueList = extractEventParameters(event, transactionReceipt);
         ArrayList<ManagerAddedEventResponse> responses = new ArrayList<ManagerAddedEventResponse>(valueList.size());
         for (EventValues eventValues : valueList) {
@@ -218,9 +259,11 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Observable<ManagerAddedEventResponse> managerAddedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
-        final Event event = new Event("ManagerAdded", 
+        final Event event = new Event("ManagerAdded",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Address>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Address>() {
+                }));
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return web3j.ethLogObservable(filter).map(new Func1<Log, ManagerAddedEventResponse>() {
@@ -236,9 +279,11 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public List<ManagerRemovedEventResponse> getManagerRemovedEvents(TransactionReceipt transactionReceipt) {
-        final Event event = new Event("ManagerRemoved", 
+        final Event event = new Event("ManagerRemoved",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Address>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Address>() {
+                }));
         List<EventValues> valueList = extractEventParameters(event, transactionReceipt);
         ArrayList<ManagerRemovedEventResponse> responses = new ArrayList<ManagerRemovedEventResponse>(valueList.size());
         for (EventValues eventValues : valueList) {
@@ -251,9 +296,11 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Observable<ManagerRemovedEventResponse> managerRemovedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
-        final Event event = new Event("ManagerRemoved", 
+        final Event event = new Event("ManagerRemoved",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Address>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Address>() {
+                }));
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return web3j.ethLogObservable(filter).map(new Func1<Log, ManagerRemovedEventResponse>() {
@@ -269,9 +316,11 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public List<WithdrawalEventResponse> getWithdrawalEvents(TransactionReceipt transactionReceipt) {
-        final Event event = new Event("Withdrawal", 
+        final Event event = new Event("Withdrawal",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Uint256>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Uint256>() {
+                }));
         List<EventValues> valueList = extractEventParameters(event, transactionReceipt);
         ArrayList<WithdrawalEventResponse> responses = new ArrayList<WithdrawalEventResponse>(valueList.size());
         for (EventValues eventValues : valueList) {
@@ -284,9 +333,11 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Observable<WithdrawalEventResponse> withdrawalEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
-        final Event event = new Event("Withdrawal", 
+        final Event event = new Event("Withdrawal",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Uint256>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Uint256>() {
+                }));
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return web3j.ethLogObservable(filter).map(new Func1<Log, WithdrawalEventResponse>() {
@@ -302,9 +353,11 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public List<WithdrawalAddressChangedEventResponse> getWithdrawalAddressChangedEvents(TransactionReceipt transactionReceipt) {
-        final Event event = new Event("WithdrawalAddressChanged", 
+        final Event event = new Event("WithdrawalAddressChanged",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Address>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Address>() {
+                }));
         List<EventValues> valueList = extractEventParameters(event, transactionReceipt);
         ArrayList<WithdrawalAddressChangedEventResponse> responses = new ArrayList<WithdrawalAddressChangedEventResponse>(valueList.size());
         for (EventValues eventValues : valueList) {
@@ -317,9 +370,11 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Observable<WithdrawalAddressChangedEventResponse> withdrawalAddressChangedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
-        final Event event = new Event("WithdrawalAddressChanged", 
+        final Event event = new Event("WithdrawalAddressChanged",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Address>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Address>() {
+                }));
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return web3j.ethLogObservable(filter).map(new Func1<Log, WithdrawalAddressChangedEventResponse>() {
@@ -335,9 +390,11 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public List<WithdrawalAddressFixedEventResponse> getWithdrawalAddressFixedEvents(TransactionReceipt transactionReceipt) {
-        final Event event = new Event("WithdrawalAddressFixed", 
+        final Event event = new Event("WithdrawalAddressFixed",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Address>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Address>() {
+                }));
         List<EventValues> valueList = extractEventParameters(event, transactionReceipt);
         ArrayList<WithdrawalAddressFixedEventResponse> responses = new ArrayList<WithdrawalAddressFixedEventResponse>(valueList.size());
         for (EventValues eventValues : valueList) {
@@ -350,9 +407,11 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Observable<WithdrawalAddressFixedEventResponse> withdrawalAddressFixedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
-        final Event event = new Event("WithdrawalAddressFixed", 
+        final Event event = new Event("WithdrawalAddressFixed",
                 Arrays.<TypeReference<?>>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Address>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }, new TypeReference<Address>() {
+                }));
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return web3j.ethLogObservable(filter).map(new Func1<Log, WithdrawalAddressFixedEventResponse>() {
@@ -368,9 +427,10 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Future<Uint256> priceForVerificationInWei() {
-        Function function = new Function("priceForVerificationInWei", 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
+        Function function = new Function("priceForVerificationInWei",
+                Arrays.<Type>asList(),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                }));
         return executeCallSingleValueReturnAsync(function);
     }
 
@@ -384,15 +444,33 @@ public final class CryptonomicaVerify extends Contract {
         return executeTransactionAsync(function);
     }
 
-    public Future<TransactionReceipt> verify(Address acc, Uint256 verificationId, Utf8String name, Uint256 keyValidUntil, Uint256 birthDateYear, Uint256 birthDateMonth, Uint256 birthDateDay, Utf8String keyFingerprint) {
-        Function function = new Function("verify", Arrays.<Type>asList(acc, verificationId, name, keyValidUntil, birthDateYear, birthDateMonth, birthDateDay, keyFingerprint), Collections.<TypeReference<?>>emptyList());
+    public Future<TransactionReceipt> verify(Address acc,
+                                             Uint256 verificationId,
+                                             Utf8String name,
+                                             Uint256 keyValidUntil,
+                                             Uint256 birthDateYear,
+                                             Uint256 birthDateMonth,
+                                             Uint256 birthDateDay,
+                                             Utf8String keyFingerprint) {
+        Function function = new Function("verify",
+                Arrays.<Type>asList(
+                        acc,
+                        verificationId,
+                        name, keyValidUntil,
+                        birthDateYear,
+                        birthDateMonth,
+                        birthDateDay,
+                        keyFingerprint),
+                Collections.<TypeReference<?>>emptyList()
+        );
         return executeTransactionAsync(function);
     }
 
     public Future<Uint256> numberOfVerifications(Address param0) {
-        Function function = new Function("numberOfVerifications", 
-                Arrays.<Type>asList(param0), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
+        Function function = new Function("numberOfVerifications",
+                Arrays.<Type>asList(param0),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                }));
         return executeCallSingleValueReturnAsync(function);
     }
 
@@ -402,9 +480,10 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Future<Bool> withdrawalAddressFixed() {
-        Function function = new Function("withdrawalAddressFixed", 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
+        Function function = new Function("withdrawalAddressFixed",
+                Arrays.<Type>asList(),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {
+                }));
         return executeCallSingleValueReturnAsync(function);
     }
 
@@ -414,21 +493,55 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Future<Address> owner() {
-        Function function = new Function("owner", 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+        Function function = new Function("owner",
+                Arrays.<Type>asList(),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }));
         return executeCallSingleValueReturnAsync(function);
     }
 
-    public Future<TransactionReceipt> uploadSignedString(Uint256 verificationId, Utf8String signedString) {
-        Function function = new Function("uploadSignedString", Arrays.<Type>asList(verificationId, signedString), Collections.<TypeReference<?>>emptyList());
+    public Future<TransactionReceipt> uploadSignedString(Uint256 verificationId,
+                                                         Utf8String signedString) {
+        Function function = new Function("uploadSignedString",
+                Arrays.<Type>asList(
+                        verificationId,
+                        signedString
+                ),
+                Collections.<TypeReference<?>>emptyList());
+
         return executeTransactionAsync(function);
     }
 
+    public TransactionReceipt uploadSignedStringPayable(Uint256 verificationId,
+                                                        Utf8String signedString,
+                                                        BigInteger weiValue)
+            throws InterruptedException, TransactionTimeoutException, IOException {
+        Function function = new Function(
+                "uploadSignedString",
+                Arrays.<Type>asList(
+                        verificationId,
+                        signedString
+                ),
+                Collections.<TypeReference<?>>emptyList());
+
+        return executeTransaction(FunctionEncoder.encode(function), weiValue);
+    }
+
     public Future<List<Type>> verification(Address param0, Uint256 param1) {
-        Function function = new Function("verification", 
-                Arrays.<Type>asList(param0, param1), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>() {}, new TypeReference<Utf8String>() {}, new TypeReference<Bool>() {}, new TypeReference<Utf8String>() {}, new TypeReference<Utf8String>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}, new TypeReference<Bool>() {}, new TypeReference<Uint256>() {}));
+        Function function = new Function("verification",
+                Arrays.<Type>asList(param0, param1),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>() {
+                }, new TypeReference<Utf8String>() {
+                }, new TypeReference<Bool>() {
+                }, new TypeReference<Utf8String>() {
+                }, new TypeReference<Utf8String>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Uint256>() {
+                }, new TypeReference<Bool>() {
+                }, new TypeReference<Uint256>() {
+                }));
         return executeCallMultipleValueReturnAsync(function);
     }
 
@@ -448,16 +561,18 @@ public final class CryptonomicaVerify extends Contract {
     }
 
     public Future<Address> withdrawalAddress() {
-        Function function = new Function("withdrawalAddress", 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+        Function function = new Function("withdrawalAddress",
+                Arrays.<Type>asList(),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }));
         return executeCallSingleValueReturnAsync(function);
     }
 
     public Future<Bool> isManager(Address param0) {
-        Function function = new Function("isManager", 
-                Arrays.<Type>asList(param0), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
+        Function function = new Function("isManager",
+                Arrays.<Type>asList(param0),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {
+                }));
         return executeCallSingleValueReturnAsync(function);
     }
 

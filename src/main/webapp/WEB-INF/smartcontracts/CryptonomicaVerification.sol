@@ -115,7 +115,7 @@ contract CryptonomicaVerification {
     /* -------------------- Verification functions : ---------------------- */
 
     // get unique string for verification request:
-    function getStringToSignWithKey(string _fingerprint) returns (bytes32) {// from user acc
+    function setStringToSignWithKey(string _fingerprint) returns (bytes32) {// from user acc
 
         bytes32 strToSign = sha3(// alias to keccak256(), returns (bytes32)
         msg.sender,

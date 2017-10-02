@@ -12,7 +12,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -42,8 +42,8 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.github.jnr:jffi:native:1.2.14" level="project" />
     <orderEntry type="library" name="Maven: org.ow2.asm:asm:5.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.ow2.asm:asm-commons:5.0.3" level="project" />
-    <orderEntry type="library" name="Maven: org.ow2.asm:asm-tree:5.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.ow2.asm:asm-analysis:5.0.3" level="project" />
+    <orderEntry type="library" name="Maven: org.ow2.asm:asm-tree:5.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.ow2.asm:asm-util:5.0.3" level="project" />
     <orderEntry type="library" name="Maven: com.github.jnr:jnr-x86asm:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: com.github.jnr:jnr-constants:0.9.6" level="project" />

@@ -24,8 +24,8 @@
           <element id="library" level="project" name="Maven: com.github.jnr:jffi:native:1.2.14" />
           <element id="library" level="project" name="Maven: org.ow2.asm:asm:5.0.3" />
           <element id="library" level="project" name="Maven: org.ow2.asm:asm-commons:5.0.3" />
-          <element id="library" level="project" name="Maven: org.ow2.asm:asm-tree:5.0.3" />
           <element id="library" level="project" name="Maven: org.ow2.asm:asm-analysis:5.0.3" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm-tree:5.0.3" />
           <element id="library" level="project" name="Maven: org.ow2.asm:asm-util:5.0.3" />
           <element id="library" level="project" name="Maven: com.github.jnr:jnr-x86asm:1.0.2" />
           <element id="library" level="project" name="Maven: com.github.jnr:jnr-constants:0.9.6" />

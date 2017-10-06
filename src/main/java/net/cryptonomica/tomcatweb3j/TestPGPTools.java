@@ -1,5 +1,10 @@
 package net.cryptonomica.tomcatweb3j;
 
+import org.bouncycastle.openpgp.PGPPublicKey;
+
+import javax.xml.bind.DatatypeConverter;
+import java.util.Arrays;
+
 /**
  * Created by viktor on 18/07/17
  */
@@ -61,12 +66,52 @@ public class TestPGPTools {
         // Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 
         try {
-            // Boolean result1 = PGPTools.verifySignedString(signedString1, publicKey);
-            // System.out.println("result: " + result1);
+            Boolean result1 = PGPTools.verifySignedString(signedString1, publicKey);
+            System.out.println("result: " + result1);
 
-            // Boolean result2 = PGPTools.verifySignedString(signedString2, publicKey);
-            // System.out.println("result: " + result2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        try {
+            Boolean result2 = PGPTools.verifySignedString(signedString2, publicKey);
+            System.out.println("result: " + result2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            PGPPublicKey pgpPublicKey = PGPTools.readPublicKeyFromString(publicKey);
+
+            byte[] fingerprintByteArray = pgpPublicKey.getFingerprint();
+            String fingerprintStr = DatatypeConverter.printHexBinary(fingerprintByteArray);
+            byte[] fingerprintByteArrayParsedFromStr = DatatypeConverter.parseHexBinary(fingerprintStr);
+
+            System.out.println("fingerprintStr: " + fingerprintStr);
+
+            System.out.println("fingerprintByteArray.length:" + fingerprintByteArray.length);
+            System.out.println("fingerprintByteArrayParsedFromStr.length:" + fingerprintByteArrayParsedFromStr.length);
+
+            System.out.println(
+                    "fingerprintByteArray.equals(DatatypeConverter.parseHexBinary(fingerprintStr)): " +
+                            fingerprintByteArray.equals(DatatypeConverter.parseHexBinary(fingerprintStr))
+                    // false
+                    // "Cause they're not equal, ie: they're different arrays with equal elements inside"
+                    // see: https://stackoverflow.com/a/9499610/1697878
+            );
+
+            System.out.println(
+                    // see: https://stackoverflow.com/a/9499597/1697878
+                    "Arrays.equals(fingerprintByteArray, fingerprintByteArrayParsedFromStr): " +
+                            Arrays.equals(fingerprintByteArray, fingerprintByteArrayParsedFromStr)
+            );
+
+            System.out.println("fingerprintByteArray.toString(): " + fingerprintByteArray.toString());
+
+            System.out.println(
+                    // see: https://stackoverflow.com/questions/9655181/how-to-convert-a-byte-array-to-a-hex-string-in-java#comment12709256_9855338
+                    "DatatypeConverter.printHexBinary(fingerprintByteArray): " + DatatypeConverter.printHexBinary(fingerprintByteArray)
+            );
         } catch (Exception e) {
             e.printStackTrace();
         }

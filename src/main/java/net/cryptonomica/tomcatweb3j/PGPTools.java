@@ -61,10 +61,10 @@ public class PGPTools {
         return newKey.getPublicKey();
     }
 
-    private static PGPPublicKey readPublicKeyFromString(String armoredPublicPGPkeyBlock)
+    public static PGPPublicKey readPublicKeyFromString(String armoredPublicPGPKeyBlock)
             throws IOException, PGPException {
 
-        InputStream in = new ByteArrayInputStream(armoredPublicPGPkeyBlock.getBytes());
+        InputStream in = new ByteArrayInputStream(armoredPublicPGPKeyBlock.getBytes());
         PGPPublicKey pgpPublicKey = readPublicKey(in);
         in.close();
         return pgpPublicKey;

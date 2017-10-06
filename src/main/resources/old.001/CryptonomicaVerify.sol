@@ -1,30 +1,35 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.15;
 
 
 contract CryptonomicaVerify {
 
+    /* ------------------ Smart Contract variables */
     // verifications: (acc => (verificationId => verificationData)
+    // this stores verifications (represented by Verification struct) associated with Ethereum addresses
     mapping (address => mapping (uint => Verification)) public verification;
+
     // counter for verifications for acc
     mapping (address => uint) public numberOfVerifications; // this number is verification Id
+
     // ---------
     mapping (address => bool) public isManager;
 
     uint public priceForVerificationInWei;
 
-    address public withdrawalAddress; // andress to send Ether from this contract
+    address public withdrawalAddress; // address to send Ether from this contract
     bool public withdrawalAddressFixed;
 
     address public owner;
 
-    /* Constructor: */
+
+    /* --------------------------- Constructor: */
     function CryptonomicaVerify(){
         owner = msg.sender;
         isManager[msg.sender] = true;
         withdrawalAddressFixed = false;
     }
 
-    /* Verification struct: */
+    /* ------------------- Verification struct: */
     // this is created when user requests string to sign
     struct Verification {
     bytes32 stringToSign; //------------------------------------------------- 0
@@ -42,6 +47,40 @@ contract CryptonomicaVerify {
     uint revokedOn; // unix time // -----------------------------------------10
     }
 
+    /* --------------------------- Utility functions */
+
+
+    function stringToBytes32(string memory source) returns (bytes32 result) {
+        // we use this to serve bytes32 instead of string to other smart contracts
+        // see:
+        // https://ethereum.stackexchange.com/questions/1081/how-to-concatenate-a-bytes32-array-to-a-string
+        // https://ethereum.stackexchange.com/questions/2519/how-to-convert-a-bytes32-to-string
+        assembly {
+        result := mload(add(source, 32))
+        }
+    }
+
+    // to covert bytes32 back to string use:
+    function bytes32ToString(bytes32 x) constant returns (string) {
+        bytes memory bytesString = new bytes(32);
+        uint charCount = 0;
+        for (uint j = 0; j < 32; j++) {
+            byte char = byte(bytes32(uint(x) * 2 ** (8 * j)));
+            if (char != 0) {
+                bytesString[charCount] = char;
+                charCount++;
+            }
+        }
+        bytes memory bytesStringTrimmed = new bytes(charCount);
+        for (j = 0; j < charCount; j++) {
+            bytesStringTrimmed[j] = bytesString[j];
+        }
+        return string(bytesStringTrimmed);
+    }
+
+    /* -------------------------- Functions */
+
+
     // get unique string for verification request:
     function getStringToSignWithKey(string keyFingerprint) returns (bytes32) {
         bytes32 strToSign = sha3(// alias to keccak256(), returns (bytes32)
@@ -50,7 +89,9 @@ contract CryptonomicaVerify {
         block.timestamp,
         block.blockhash(block.number - 250)
         );
+
         uint verificationId = numberOfVerifications[msg.sender]++;
+
         verification[msg.sender][verificationId].stringToSign = strToSign;
         verification[msg.sender][verificationId].keyFingerprint = keyFingerprint;
         // event:

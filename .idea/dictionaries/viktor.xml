@@ -2,6 +2,8 @@
   <dictionary name="viktor">
     <words>
       <w>ethereum</w>
+      <w>struct</w>
+      <w>uint</w>
     </words>
   </dictionary>
 </component>

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * like stuct in smart contract
+ * like struct in smart contract
  */
 public class Verification implements Serializable {
 

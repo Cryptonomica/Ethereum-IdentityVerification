@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f3de3c99-d435-4f58-8109-7ff2e2ef9551" name="tomcatweb3j.cryptonomica.net" url="http://tomcatweb3j.cryptonomica.net">
+        <fileTransfer host="tomcatweb3j.cryptonomica.net" port="22" privateKey="$USER_HOME$/.ssh/tomcatWeb3j.pem" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

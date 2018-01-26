@@ -22,11 +22,11 @@
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpg-jdk15on</artifactId>
-            <!--<version>1.54</version>-->
+            <version>1.54</version>
             <!-- was a bug reading userID in key DSA + ElGamal in BC 1.54 -->
             <!--<version>1.47</version> as in cryptonomica.net code -->
             <!-- in web3j BC dependency (not with OpenPGP (bcpg) ): ver 1.54 as -->
-            <version>1.47</version>
+            <!--<version>1.47</version>-->
         </dependency>
 
         <!--<dependency>-->
@@ -37,14 +37,34 @@
         <!--</dependency>-->
         <!---->
 
+        <dependency>
+            <!--
+            https://github.com/rubenlagus/TelegramBots
+            https://github.com/rubenlagus/TelegramBots/wiki/Getting-Started
+            see also: https://habrahabr.ru/sandbox/111328/
+            -->
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>3.5</version>
+        </dependency>
+
+        <dependency>
+            <!-- https://github.com/pengrad/java-telegram-bot-api -->
+            <groupId>com.github.pengrad</groupId>
+            <artifactId>java-telegram-bot-api</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+
 
         <dependency>
             <!-- https://mvnrepository.com/artifact/org.web3j/core -->
             <!-- https://github.com/web3j/web3j#maven -->
+            <!--https://mvnrepository.com/artifact/org.web3j/core-->
             <groupId>org.web3j</groupId>
             <artifactId>core</artifactId>
             <!--<version>2.2.2</version>-->
-            <version>2.3.1</version>
+            <!--<version>3.0.1</version>-->
+            <version>3.1.1</version>
         </dependency>
 
         <!--  Gson:
@@ -59,9 +79,34 @@
 
         <!-- Apache Commons-->
         <dependency>
+            <!--
+            https://commons.apache.org/proper/commons-lang/
+            https://commons.apache.org/proper/commons-lang/javadocs/api-release/
+            https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+            -->
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.5</version>
+            <version>3.7</version>
+        </dependency>
+
+
+        <dependency>
+            <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+
+        <dependency>
+            <!--
+            https://commons.apache.org/proper/commons-text/
+            https://commons.apache.org/proper/commons-text/javadocs/api-release/
+            https://mvnrepository.com/artifact/org.apache.commons/commons-text
+            -->
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.1</version>
         </dependency>
 
         <dependency>
@@ -111,7 +156,14 @@
                 <artifactId>web3j-maven-plugin</artifactId>
                 <version>0.1.2</version>
                 <configuration>
-                    <soliditySourceFiles/>
+                    <!-- see: https://github.com/web3j/web3j-maven-plugin#configuration -->
+                    <soliditySourceFiles>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <!--<include>**/*.sol</include>-->
+                            <include>CryptonomicaVerification.sol</include>
+                        </includes>
+                    </soliditySourceFiles>
                 </configuration>
             </plugin>
 

@@ -2,6 +2,10 @@
   <dictionary name="viktor">
     <words>
       <w>ethereum</w>
+      <w>geth</w>
+      <w>mainnet</w>
+      <w>rinkeby</w>
+      <w>ropsten</w>
       <w>struct</w>
       <w>uint</w>
     </words>

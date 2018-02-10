@@ -26,52 +26,52 @@ contract CryptonomicaVerification {
     // fingerprints are stored as upper case strings like:
     // 57A5FEE5A34D563B4B85ADF3CE369FD9E77173E5
     // see: https://crypto.stackexchange.com/questions/32087/how-to-generate-fingerprint-for-pgp-public-key
-    mapping (address => bytes32) public fingerprint; // ..............................................................0
-    mapping (bytes32 => address) public bytes32FingerprintToAddress;
+    mapping(address => bytes32) public fingerprint; // ..............................................................0
+    mapping(bytes32 => address) public bytes32FingerprintToAddress;
 
-    mapping (address => uint) public keyCertificateValidUntil; // unix time ..........................................1
-    mapping (address => bytes32) public firstName; // ................................................................2
-    mapping (address => bytes32) public lastName; // .................................................................3
-    mapping (address => uint) public birthDate; // unix time .........................................................4
+    mapping(address => uint) public keyCertificateValidUntil; // unix time ..........................................1
+    mapping(address => bytes32) public firstName; // ................................................................2
+    mapping(address => bytes32) public lastName; // .................................................................3
+    mapping(address => uint) public birthDate; // unix time .........................................................4
     // Nationality - from user passport or id document:
     // 2-letter country codes defined in ISO 3166
     // like returned by Locale.getISOCountries() in Java (upper case)
     // see: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-    mapping (address => bytes32) public nationality; //      .........................................................5
-    mapping (address => uint256) public verificationAddedOn; // unix time ............................................6
-    mapping (address => uint256) public revokedOn; // unix time, returns uint256: 0 if verification is not revoked ...7
+    mapping(address => bytes32) public nationality; //      .........................................................5
+    mapping(address => uint256) public verificationAddedOn; // unix time ............................................6
+    mapping(address => uint256) public revokedOn; // unix time, returns uint256: 0 if verification is not revoked ...7
 
-    mapping (address => string) public stringToSign; // string
+    mapping(address => string) public stringToSign; // string
     // (string to sign can be requested only one time for address
     // if not yet requested value is 0 )
     // unix time online converter: https://www.epochconverter.com
     // for coders: http://www.convert-unix-time.com
-    mapping (address => uint256) public stringToSignRequestedOnUnixTime; //
-    mapping (address => uint256) public signedStringUploadedOnUnixTime; //
+    mapping(address => uint256) public stringToSignRequestedOnUnixTime; //
+    mapping(address => uint256) public signedStringUploadedOnUnixTime; //
     // this will be longer than 32 char, and have to be properly formatted (with "\n")
-    mapping (address => string) public signedString; //
+    mapping(address => string) public signedString; //
 
     /* the same data as above stored as a struct:
     struct will be returned as 'List' in web3j (only one function call needed) */
-    mapping (address => Verification) public verification;
+    mapping(address => Verification) public verification;
 
 
     struct Verification {
-    // all string have to be <= 32 chars
-    string fingerprint; // ..................................................0
-    uint keyCertificateValidUntil; // .......................................1
-    string firstName; // ....................................................2
-    string lastName;// ......................................................3
-    uint birthDate; //  .....................................................4
-    string nationality; //  .................................................5
-    uint verificationAddedOn;// .............................................6
-    uint revokedOn; // ......................................................7
+        // all string have to be <= 32 chars
+        string fingerprint; // ..................................................0
+        uint keyCertificateValidUntil; // .......................................1
+        string firstName; // ....................................................2
+        string lastName;// ......................................................3
+        uint birthDate; //  .....................................................4
+        string nationality; //  .................................................5
+        uint verificationAddedOn;// .............................................6
+        uint revokedOn; // ......................................................7
     }
 
     /*  ---------------------------------- Administrative Data */
 
     address public owner; // smart contract owner (super admin)
-    mapping (address => bool) public isManager; // list of managers
+    mapping(address => bool) public isManager; // list of managers
 
     uint public priceForVerificationInWei; // see converter on https://etherconverter.online/
 
@@ -100,7 +100,7 @@ contract CryptonomicaVerification {
         // https://ethereum.stackexchange.com/questions/9603/understanding-mload-assembly-function
         // http://solidity.readthedocs.io/en/latest/assembly.html
         assembly {
-        result := mload(add(source, 32))
+            result := mload(add(source, 32))
         }
     }
 
@@ -154,16 +154,16 @@ contract CryptonomicaVerification {
     function memcpy(uint dest, uint src, uint len) private pure {
         for (; len >= 32; len -= 32) {
             assembly {
-            mstore(dest, mload(src))
+                mstore(dest, mload(src))
             }
             dest += 32;
             src += 32;
         }
         uint mask = 256 ** (32 - len) - 1;
         assembly {
-        let srcpart := and(mload(src), not(mask))
-        let destpart := and(mload(dest), mask)
-        mstore(dest, or(destpart, srcpart))
+            let srcpart := and(mload(src), not(mask))
+            let destpart := and(mload(dest), mask)
+            mstore(dest, or(destpart, srcpart))
         }
     }
 
@@ -175,7 +175,7 @@ contract CryptonomicaVerification {
     function toSlice(string self) internal pure returns (slice) {
         uint ptr;
         assembly {
-        ptr := add(self, 0x20)
+            ptr := add(self, 0x20)
         }
         return slice(bytes(self).length, ptr);
     }
@@ -203,10 +203,10 @@ contract CryptonomicaVerification {
      */
     function join(slice self, slice[] parts) internal pure returns (string) {
         if (parts.length == 0)
-        return "";
+            return "";
         uint length = self._len * (parts.length - 1);
         for (uint i = 0; i < parts.length; i++)
-        length += parts[i]._len;
+            length += parts[i]._len;
         var ret = new string(length);
         uint retptr;
         assembly {retptr := add(ret, 32)}
@@ -329,12 +329,12 @@ contract CryptonomicaVerification {
     // ---
     // from 'manager' account only
     function addVerificationData(
-    address acc, //
-    uint _keyCertificateValidUntil, //
-    string _firstName, //
-    string _lastName, //
-    uint _birthDate, //
-    string _nationality) public returns (bool) {
+        address acc, //
+        uint _keyCertificateValidUntil, //
+        string _firstName, //
+        string _lastName, //
+        uint _birthDate, //
+        string _nationality) public returns (bool) {
 
         // (!!!) only manager can add verification data
         require(isManager[msg.sender]);
@@ -378,31 +378,31 @@ contract CryptonomicaVerification {
 
 
         VerificationAdded(
-        verification[acc].fingerprint,
-        acc,
-        keyCertificateValidUntil[acc],
-        verification[acc].firstName,
-        verification[acc].lastName,
-        birthDate[acc],
-        verification[acc].nationality,
+            verification[acc].fingerprint,
+            acc,
+            keyCertificateValidUntil[acc],
+            verification[acc].firstName,
+            verification[acc].lastName,
+            birthDate[acc],
+            verification[acc].nationality,
         // stringToSignBytes32[acc],
         // signedString[acc],
         // verificationAddedOn[acc],
-        msg.sender
+            msg.sender
         );
 
         return true;
     }
 
     event VerificationAdded (
-    string indexed forFingerprint, // (1) indexed
-    address indexed verifiedAccount, // (2) indexed
-    uint keyCertificateValidUntilUnixTime,
-    string userFirstName,
-    string userLastName,
-    uint userBirthDate,
-    string userNationality, // (3) indexed
-    address verificationAddedByAccount
+        string indexed forFingerprint, // (1) indexed
+        address indexed verifiedAccount, // (2) indexed
+        uint keyCertificateValidUntilUnixTime,
+        string userFirstName,
+        string userLastName,
+        uint userBirthDate,
+        string userNationality, // (3) indexed
+        address verificationAddedByAccount
     );
 
     // ---
@@ -419,20 +419,20 @@ contract CryptonomicaVerification {
 
         // event
         VerificationRevoked(
-        acc,
-        _fingerprint,
-        block.timestamp,
-        msg.sender
+            acc,
+            _fingerprint,
+            block.timestamp,
+            msg.sender
         );
 
         return true;
     }
 
     event VerificationRevoked (
-    address indexed revocedforAccount,
-    string indexed withFingerprint,
-    uint revokedOnUnixTime,
-    address indexed revokedBy
+        address indexed revocedforAccount,
+        string indexed withFingerprint,
+        uint revokedOnUnixTime,
+        address indexed revokedBy
     );
 
 

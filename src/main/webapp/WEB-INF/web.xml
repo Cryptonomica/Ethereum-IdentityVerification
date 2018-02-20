@@ -14,26 +14,8 @@
     <!-- SERVLETS BEGIN -->
 
     <servlet>
-        <servlet-name>TestingServlet</servlet-name>
-        <servlet-class>old.contracts.TestingServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>TestingServlet</servlet-name>
-        <url-pattern>/TestingServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>GetStringToSign</servlet-name>
-        <servlet-class>net.cryptonomica.tomcatweb3j.servlets.GetStringToSignServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GetStringToSign</servlet-name>
-        <url-pattern>/GetStringToSign</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>GetSignedString</servlet-name>
-        <servlet-class>net.cryptonomica.tomcatweb3j.servlets.GetSignedStringServlet</servlet-class>
+        <servlet-class>net.cryptonomica.tomcatweb3j.servlets.GetVerificationRequestDataServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GetSignedString</servlet-name>
@@ -58,15 +40,14 @@
         <url-pattern>/addVerificationData</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>net.cryptonomica.tomcatweb3j.servlets.TestServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/testServlet</url-pattern>
-    </servlet-mapping>
-
+    <!--<servlet>-->
+    <!--<servlet-name>TestServlet</servlet-name>-->
+    <!--<servlet-class>net.cryptonomica.tomcatweb3j.servlets.TestServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>TestServlet</servlet-name>-->
+    <!--<url-pattern>/testServlet</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!-- SERVLETS END -->
 

@@ -2,14 +2,14 @@ package net.cryptonomica.tomcatweb3j.contracts;
 
 import com.google.gson.Gson;
 import net.cryptonomica.tomcatweb3j.entities.AddVerificationDataObj;
-import net.cryptonomica.tomcatweb3j.entities.Verification;
+import net.cryptonomica.tomcatweb3j.entities.DataCurrentNetwork;
+import net.cryptonomica.tomcatweb3j.entities.VerificationStruct;
 import net.cryptonomica.tomcatweb3j.utilities.DataCurrentNetworkFactory;
 import net.cryptonomica.tomcatweb3j.utilities.Web3jServices;
-import org.web3j.abi.datatypes.Address;
-import org.web3j.abi.datatypes.generated.Bytes32;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.Log;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.tuples.generated.Tuple9;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -31,99 +31,120 @@ public class CryptonomicaVerificationFunctions {
     private static final Gson GSON = new Gson();
 
     /* --- Contract instance. (!) can be null */
-    private static CryptonomicaVerification cryptonomicaVerification = DataCurrentNetworkFactory.getDataCurrentNetworkInstance().cryptonomicaVerification;
-    private static Web3j web3j = DataCurrentNetworkFactory.getDataCurrentNetworkInstance().web3j;
+    private static DataCurrentNetwork dataCurrentNetwork = DataCurrentNetworkFactory.getDataCurrentNetworkInstance();
+    private static CryptonomicaVerification cryptonomicaVerification = dataCurrentNetwork.cryptonomicaVerification;
+    private static Web3j web3j = dataCurrentNetwork.web3j;
 
     // function setPriceForVerification(uint priceInWei) public returns (bool)
     // see: https://etherconverter.online
     public static TransactionReceipt setPriceForVerification(Long priceInWei) throws IOException {
 
+        TransactionReceipt transactionReceipt;
+
         if (cryptonomicaVerification == null) {
-            // -> to servlet
+            // -> to servlet or object/class calling this function
             throw new IOException("Contract can not be loaded");
         }
 
-        TransactionReceipt transactionReceipt = null;
         BigInteger priceInWeiBigInteger = BigInteger.valueOf(priceInWei);
 
         try {
+
             transactionReceipt = cryptonomicaVerification.setPriceForVerification(priceInWeiBigInteger).send();
+
+            LOG.info(GSON.toJson(transactionReceipt));
+            int transactionReceiptHashCode = transactionReceipt.hashCode();
+
+            final List<Log> logs = transactionReceipt.getLogs();
+            for (Log log : logs) {
+                System.out.println(
+                        "log.getType(): " + log.getType()
+                                + " log.hashCode(): " + log.hashCode()
+                                + " log.getData(): " + log.getData()
+                );
+            }
+
+            String txHash = transactionReceipt.getTransactionHash();
+            final List<CryptonomicaVerification.PriceChangedEventResponse> priceChangedEvents = cryptonomicaVerification.getPriceChangedEvents(transactionReceipt);
+            System.out.println(priceChangedEvents);
+
         } catch (Exception e) {
             throw new IOException(e.getMessage());
         }
-
-        LOG.info(GSON.toJson(transactionReceipt));
-        transactionReceipt.hashCode();
-        final List<Log> logs = transactionReceipt.getLogs();
-        for (Log log : logs) {
-            System.out.println(
-                    "log.getType(): " + log.getType()
-                            + " log.hashCode(): " + log.hashCode()
-                            + " log.getData(): " + log.getData()
-            );
-        }
-
-        String txHash = transactionReceipt.getTransactionHash();
-        final List<CryptonomicaVerification.PriceChangedEventResponse> priceChangedEvents = cryptonomicaVerification.getPriceChangedEvents(transactionReceipt);
-        System.out.println(priceChangedEvents);
 
         return transactionReceipt;
     }
 
-    // mapping (address => string) public stringToSign; // string
-    public static String getStringToSignFromSC(String userAddress) throws IOException {
-
-        if (cryptonomicaVerification == null) {
-            // -> to servlet
-            throw new IOException("Contract can not be loaded");
-        }
-
-        String stringToSign = null;
-        try {
-            stringToSign = cryptonomicaVerification.stringToSign(userAddress).send();
-        } catch (Exception e) {
-            LOG.severe(e.getMessage());
-            throw new IOException(e.getMessage());
-        }
-
-        LOG.info("String stringToSign: " + stringToSign);
-
-        return stringToSign;
-
-    }
-
     public static String getSignedStringFromSC(String userAddress) throws IOException {
 
+        String signedString = null;
+
         if (cryptonomicaVerification == null) {
-            // -> to servlet
+            // -> to servlet or object/class calling this function
             throw new IOException("Contract can not be loaded");
         }
 
-        String signedString = null;
         try {
             signedString = cryptonomicaVerification.signedString(userAddress).send();
+            LOG.info("signedString for " + userAddress + " : ");
+            LOG.info(signedString);
+
         } catch (Exception e) {
             LOG.severe(e.getMessage());
             throw new IOException(e.getMessage());
         }
-
-        LOG.info("signedString for " + userAddress + " : ");
-        LOG.info(signedString);
 
         return signedString;
     }
 
+    public static String getUnverifiedFingerprint(String userAddress) throws IOException {
+        String unverifiedFingerprint = null;
+        if (cryptonomicaVerification == null) {
+            // -> to servlet or object/class calling this function
+            throw new IOException("Contract can not be loaded");
+        }
+        try {
+            unverifiedFingerprint = cryptonomicaVerification.unverifiedFingerprint(userAddress).send();
+            LOG.info("unverifiedFingerprint for " + userAddress + " : ");
+            LOG.info(unverifiedFingerprint);
 
-    public static Verification getVerificationStructObj(String userAddress) throws IOException {
+        } catch (Exception e) {
+            LOG.severe(e.getMessage());
+            throw new IOException(e.getMessage());
+        }
+        return unverifiedFingerprint;
+    }
+
+    public static String getAddresFromFingerprint(String fingerprint) throws IOException {
+        String userAddress = null;
+        if (cryptonomicaVerification == null) {
+            // -> to servlet or object/class calling this function
+            throw new IOException("Contract can not be loaded");
+        }
+
+        byte[] fingerprintBytes20 = Web3jServices.bytes20FromHexString(fingerprint).getValue();
+
+        try {
+            userAddress = cryptonomicaVerification.addressAttached(fingerprintBytes20).send();
+            LOG.info("userAddress for " + fingerprint + " : " + userAddress);
+        } catch (Exception e) {
+            LOG.severe(e.getMessage());
+            throw new IOException(e.getMessage());
+        }
+        return userAddress;
+    }
+
+    public static VerificationStruct getVerificationStruct(String userAddress) throws IOException {
 
         if (cryptonomicaVerification == null) {
             // -> to servlet
             throw new IOException("Contract can not be loaded");
         }
 
-        Verification verification = null;
+        VerificationStruct verification = null;
         try {
-            verification = new Verification(cryptonomicaVerification.verification(userAddress).send());
+            Tuple9 tuple9 = cryptonomicaVerification.verification(userAddress).send();
+            verification = new VerificationStruct(tuple9);
         } catch (Exception e) {
             LOG.severe(e.getMessage());
             throw new IOException(e.getMessage());
@@ -134,57 +155,36 @@ public class CryptonomicaVerificationFunctions {
         return verification;
     }
 
-    public static String getBytes32FingerprintToAddress(String fingerprint) throws IOException {
-
-        if (cryptonomicaVerification == null) {
-            // -> to servlet
-            throw new IOException("Contract can not be loaded");
-        }
-
-        Bytes32 bytes32 = Web3jServices.stringToBytes32(fingerprint);
-        String addressString = null;
-
-        try {
-            addressString = cryptonomicaVerification.bytes32FingerprintToAddress(bytes32.getValue()).send();
-        } catch (Exception e) {
-            LOG.severe(e.getMessage());
-            throw new IOException(e.getMessage());
-        }
-
-        System.out.println(addressString);
-
-        return addressString;
-    }
-
     /* Solidity:
     function addVerificationData(
-        address acc,
-        uint _keyCertificateValidUntil,
-        string _firstName,
-        string _lastName,
-        uint _birthDate,
-        string _nationality
-    ) public returns (bool) { ...
+        address _acc, //
+        string _fingerprint, // "57A5FEE5A34D563B4B85ADF3CE369FD9E77173E5"
+        bytes20 _fingerprintBytes20, // "0x57A5FEE5A34D563B4B85ADF3CE369FD9E77173E5"
+        uint _keyCertificateValidUntil, //
+        string _firstName, //
+        string _lastName, //
+        uint _birthDate, //
+        string _nationality) public {
     */
     public static TransactionReceipt addVerificationData(AddVerificationDataObj addVerificationDataObj) throws IOException {
 
         if (cryptonomicaVerification == null) {
-            // -> to servlet
             throw new IOException("Contract can not be loaded");
         }
 
         TransactionReceipt transactionReceipt = null;
         try {
-            transactionReceipt = cryptonomicaVerification.addVerificationData( // String acc, BigInteger _keyCertificateValidUntil, String _firstName, String _lastName, BigInteger _birthDate, String _nationality
-                    addVerificationDataObj.getAcc(), // String acc
-                    BigInteger.valueOf(addVerificationDataObj.getKeyCertificateValidUntil()), // BigInteger _keyCertificateValidUntil
-                    addVerificationDataObj.getFirstName(), // tring _firstName
-                    addVerificationDataObj.getLastName(), // String _lastName
-                    BigInteger.valueOf(addVerificationDataObj.getBirthDate()), // BigInteger _birthDate
-                    addVerificationDataObj.getNationality() //String _nationality
-
+            transactionReceipt = cryptonomicaVerification.addVerificationData(
+                    addVerificationDataObj.getAcc(),
+                    addVerificationDataObj.getFingerprint(),
+                    addVerificationDataObj.getFingerprintBytes20(),
+                    addVerificationDataObj.getKeyCertificateValidUntil(),
+                    addVerificationDataObj.getFirstName(),
+                    addVerificationDataObj.getLastName(),
+                    addVerificationDataObj.getBirthDate(),
+                    addVerificationDataObj.getNationality()
             ).send();
-            ;
+
             LOG.info(transactionReceipt.getTransactionHash());
         } catch (Exception e) {
             LOG.severe(e.getMessage());

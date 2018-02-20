@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import net.cryptonomica.tomcatweb3j.utilities.Web3jServices;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigInteger;
 import java.util.logging.Logger;
 
 public class AddVerificationDataObj {
@@ -13,39 +14,58 @@ public class AddVerificationDataObj {
     // Find or create a logger for a named subsystem. If a logger has already been created with the given name it is returned.
     // Otherwise a new logger is created.
     // - When running Tomcat on unixes, the console output is usually redirected to the file named catalina.out
-    private static final String className = Web3jServices.class.getName();
-    private static final Logger LOG = Logger.getLogger(className);
+    private static final Logger LOG = Logger.getLogger(AddVerificationDataObj.class.getName());
 
     /* --- Gson: */
     private static final Gson GSON = new Gson();
 
+    /* --- data fields */
+
+    /* Solidity:
+function addVerificationData(
+    address _acc, //
+    string _fingerprint, // "57A5FEE5A34D563B4B85ADF3CE369FD9E77173E5"
+    bytes20 _fingerprintBytes20, // "0x57A5FEE5A34D563B4B85ADF3CE369FD9E77173E5"
+    uint _keyCertificateValidUntil, //
+    string _firstName, //
+    string _lastName, //
+    uint _birthDate, //
+    string _nationality) public {
+*/
     private String acc;
-    private Integer keyCertificateValidUntil;
+    private String fingerprint;
+    private byte[] fingerprintBytes20;
+    private BigInteger keyCertificateValidUntil;
     private String firstName;
     private String lastName;
-    private Integer birthDate;
+    private BigInteger birthDate;
     private String nationality;
 
     /* --- Constructors */
 
     public AddVerificationDataObj() {
-        //
     }
 
     public AddVerificationDataObj(HttpServletRequest request) {
         this.acc = request.getParameter("acc");
-        this.keyCertificateValidUntil = Integer.parseInt(request.getParameter("keyCertificateValidUntil"));
+        this.fingerprint = request.getParameter("fingerprint");
+        this.fingerprintBytes20 = Web3jServices.bytes20FromHexString(request.getParameter("fingerprint")).getValue();
+        // see: https://stackoverflow.com/questions/2646049/what-is-the-most-effective-way-to-create-biginteger-instance-from-int-value
+        this.keyCertificateValidUntil = BigInteger.valueOf(
+                Integer.parseInt(request.getParameter("keyCertificateValidUntil"))
+        );
         this.firstName = request.getParameter("firstName");
         this.lastName = request.getParameter("lastName");
-        this.birthDate = Integer.parseInt(request.getParameter("birthDate"));
+        // see: https://stackoverflow.com/questions/2646049/what-is-the-most-effective-way-to-create-biginteger-instance-from-int-value
+        this.birthDate = BigInteger.valueOf(
+                Integer.parseInt(request.getParameter("birthDate"))
+        );
         this.nationality = request.getParameter("nationality");
 
         LOG.info(this.toString());
-
     }
 
     /* --- to String */
-
     @Override
     public String toString() {
         return GSON.toJson(this);
@@ -61,11 +81,27 @@ public class AddVerificationDataObj {
         this.acc = acc;
     }
 
-    public Integer getKeyCertificateValidUntil() {
+    public String getFingerprint() {
+        return fingerprint;
+    }
+
+    public void setFingerprint(String fingerprint) {
+        this.fingerprint = fingerprint;
+    }
+
+    public byte[] getFingerprintBytes20() {
+        return fingerprintBytes20;
+    }
+
+    public void setFingerprintBytes20(byte[] fingerprintBytes20) {
+        this.fingerprintBytes20 = fingerprintBytes20;
+    }
+
+    public BigInteger getKeyCertificateValidUntil() {
         return keyCertificateValidUntil;
     }
 
-    public void setKeyCertificateValidUntil(Integer keyCertificateValidUntil) {
+    public void setKeyCertificateValidUntil(BigInteger keyCertificateValidUntil) {
         this.keyCertificateValidUntil = keyCertificateValidUntil;
     }
 
@@ -85,11 +121,11 @@ public class AddVerificationDataObj {
         this.lastName = lastName;
     }
 
-    public Integer getBirthDate() {
+    public BigInteger getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Integer birthDate) {
+    public void setBirthDate(BigInteger birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -100,5 +136,4 @@ public class AddVerificationDataObj {
     public void setNationality(String nationality) {
         this.nationality = nationality;
     }
-
 }

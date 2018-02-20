@@ -52,13 +52,13 @@
           <element id="library" level="project" name="Maven: com.squareup.okhttp3:okhttp:3.9.0" />
           <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.13.0" />
           <element id="library" level="project" name="Maven: com.squareup.okhttp3:logging-interceptor:3.9.0" />
-          <element id="library" level="project" name="Maven: org.web3j:core:3.1.1" />
-          <element id="library" level="project" name="Maven: org.web3j:abi:3.1.1" />
-          <element id="library" level="project" name="Maven: org.web3j:utils:3.1.1" />
-          <element id="library" level="project" name="Maven: org.web3j:crypto:3.1.1" />
-          <element id="library" level="project" name="Maven: org.web3j:rlp:3.1.1" />
+          <element id="library" level="project" name="Maven: org.web3j:core:3.2.0" />
+          <element id="library" level="project" name="Maven: org.web3j:abi:3.2.0" />
+          <element id="library" level="project" name="Maven: org.web3j:utils:3.2.0" />
+          <element id="library" level="project" name="Maven: org.web3j:crypto:3.2.0" />
+          <element id="library" level="project" name="Maven: org.web3j:rlp:3.2.0" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
-          <element id="library" level="project" name="Maven: org.web3j:tuples:3.1.1" />
+          <element id="library" level="project" name="Maven: org.web3j:tuples:3.2.0" />
           <element id="library" level="project" name="Maven: com.github.jnr:jnr-unixsocket:0.15" />
           <element id="library" level="project" name="Maven: com.github.jnr:jnr-ffi:2.1.2" />
           <element id="library" level="project" name="Maven: com.github.jnr:jffi:1.2.14" />

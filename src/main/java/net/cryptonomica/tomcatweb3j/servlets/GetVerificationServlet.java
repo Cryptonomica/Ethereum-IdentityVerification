@@ -1,7 +1,7 @@
 package net.cryptonomica.tomcatweb3j.servlets;
 
 import net.cryptonomica.tomcatweb3j.contracts.CryptonomicaVerificationFunctions;
-import net.cryptonomica.tomcatweb3j.entities.Verification;
+import net.cryptonomica.tomcatweb3j.entities.VerificationStruct;
 import net.cryptonomica.tomcatweb3j.utilities.ApiKeyUtils;
 import net.cryptonomica.tomcatweb3j.utilities.ServletUtils;
 
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
- * get verification from the smart contract
+ * get verification from the smart contract by eth address or fingerprint
  */
 @WebServlet(name = "GetVerificationServlet")
 // <url-pattern>/getVerification</url-pattern>
@@ -34,15 +34,16 @@ public class GetVerificationServlet extends HttpServlet {
         String fingerprintStr = request.getParameter("fingerprint");
 
         // (3) get data from contract
-        Verification verification = null;
+        VerificationStruct verification = null;
         if (userEthAddressStr != null && userEthAddressStr.length() == 42) {
-            verification = CryptonomicaVerificationFunctions.getVerificationStructObj(userEthAddressStr);
+            verification = CryptonomicaVerificationFunctions.getVerificationStruct(userEthAddressStr);
             // fingerprint is 20 bytes, in hexadecimal 40 symbols string representation.
             // fingerprints are stored as upper case strings like:
             // 57A5FEE5A34D563B4B85ADF3CE369FD9E77173E5
         } else if (fingerprintStr != null && fingerprintStr.length() == 40) {
-            String addressString = CryptonomicaVerificationFunctions.getBytes32FingerprintToAddress(fingerprintStr);
-            verification = CryptonomicaVerificationFunctions.getVerificationStructObj(addressString);
+
+            String addressString = CryptonomicaVerificationFunctions.getAddresFromFingerprint(fingerprintStr);
+            verification = CryptonomicaVerificationFunctions.getVerificationStruct(userEthAddressStr);
         } else {
             throw new IOException("Wrong request data");
         }
@@ -50,7 +51,7 @@ public class GetVerificationServlet extends HttpServlet {
         LOG.info(verification.toString());
 
         // (4) send response
-        ServletUtils.sendJsonResponseFromObject(response, verification);
+        ServletUtils.sendJsonResponseFromObject(response, verification); //
     }
 
     @Override

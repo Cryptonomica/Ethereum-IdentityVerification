@@ -73,6 +73,14 @@ public class ServletUtils {
         return result;
     } // end of getRequestHeaderNames()
 
+    private static String removeLastComma(String str) {
+        int commaIndex = str.lastIndexOf(","); // -1 if there is no such occurrence.
+        if (commaIndex > 0 && commaIndex == str.length() - 1) {
+            str = str.substring(0, commaIndex);
+        }
+        return str;
+    }
+
     public static String getAllRequestData(HttpServletRequest request) {
 
         String headerNamesStr = ServletUtils.getRequestHeaders(request);
@@ -111,15 +119,6 @@ public class ServletUtils {
         pw.close(); //closing the stream
 
     } // end of sendJsonResponse()
-
-    private static String removeLastComma(String str) {
-
-        int commaIndex = str.lastIndexOf(","); // -1 if there is no such occurrence.
-        if (commaIndex > 0 && commaIndex == str.length() - 1) {
-            str = str.substring(0, commaIndex);
-        }
-        return str;
-    }
 
     public static void sendJsonResponseFromObject(HttpServletResponse response, Object object) throws IOException {
         LOG.info("object:");

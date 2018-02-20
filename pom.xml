@@ -29,14 +29,6 @@
             <!--<version>1.47</version>-->
         </dependency>
 
-        <!--<dependency>-->
-        <!--&lt;!&ndash; https://github.com/justinludwig/jpgpj &ndash;&gt;-->
-        <!--<groupId>org.c02e.jpgpj</groupId>-->
-        <!--<artifactId>jpgpj</artifactId>-->
-        <!--<version>0.1</version>-->
-        <!--</dependency>-->
-        <!---->
-
         <dependency>
             <!--
             https://github.com/rubenlagus/TelegramBots
@@ -47,14 +39,12 @@
             <artifactId>telegrambots</artifactId>
             <version>3.5</version>
         </dependency>
-
         <dependency>
             <!-- https://github.com/pengrad/java-telegram-bot-api -->
             <groupId>com.github.pengrad</groupId>
             <artifactId>java-telegram-bot-api</artifactId>
             <version>3.4.1</version>
         </dependency>
-
 
         <dependency>
             <!-- https://mvnrepository.com/artifact/org.web3j/core -->
@@ -64,7 +54,8 @@
             <artifactId>core</artifactId>
             <!--<version>2.2.2</version>-->
             <!--<version>3.0.1</version>-->
-            <version>3.1.1</version>
+            <!--<version>3.1.1</version>-->
+            <version>3.2.0</version>
         </dependency>
 
         <!--  Gson:
@@ -166,7 +157,6 @@
                     </soliditySourceFiles>
                 </configuration>
             </plugin>
-
 
         </plugins>
     </build>

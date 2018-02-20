@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/*
+ * --- currently disabled in web.xml
+ * */
+
 @WebServlet(name = "TestServlet")
 // <url-pattern>/testServlet</url-pattern>
 public class TestServlet extends HttpServlet {

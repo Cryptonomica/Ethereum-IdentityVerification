@@ -40,14 +40,14 @@
         <url-pattern>/addVerificationData</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>-->
-    <!--<servlet-name>TestServlet</servlet-name>-->
-    <!--<servlet-class>net.cryptonomica.tomcatweb3j.servlets.TestServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>TestServlet</servlet-name>-->
-    <!--<url-pattern>/testServlet</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>net.cryptonomica.tomcatweb3j.servlets.TestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/testServlet</url-pattern>
+    </servlet-mapping>
 
     <!-- SERVLETS END -->
 

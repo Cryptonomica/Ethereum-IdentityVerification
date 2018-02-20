@@ -13,14 +13,9 @@ function setPriceForVerification(uint priceInWei) public returns (bool)
 ## Using smart contract 
 
 
-### Request string to sign with key 
+### String to sign with key
 
-````
-function requestStringToSignWithKey(string _fingerprint) public returns (bytes32)
-````
-
-_fingerprint - upper case OpenPGP fingerprint, f.e. 05600EB8208485E6942666E06A7B21E2844C7980 
-
+"I hereby confirm that the address <address lowercase> is my Ethereum address"
 
 ### Sign this string  
 
@@ -59,7 +54,7 @@ zBQMjW3e9dnDJodrosl+TQ1LGkQLy+R6BPX5JoBDa59F0ncyfO+Z+ILrv+hLLbQ=
 call: 
 
 ```
-function uploadSignedString(string _signedString) public payable returns (bool) 
+function uploadSignedString(string _fingerprint, string _signedString) public payable {
 ```
 
 ascii armored text containing signed string and the signature have to be properly formatted, i.e.: 
@@ -89,44 +84,34 @@ for input on frontend use textarea input type, not text input type
 Cryptonomica server requests from smart contract for given Ethereum address: 
 
 
-1) string to sign ( mapping (address => bytes32) public stringToSignBytes32; -> convert to the string that shows the hex representation of bytes32 using )
+1) signed string ( mapping(address => string) public signedString; )
 
-```
-net.cryptonomica.tomcatweb3j.utilities.Web3jServices.getStringToSignFromSC(String userAddress)
-```
+2) (yet unverified) fingerprint ( mapping(address => string) public unverifiedFingerprint; )
 
-2) signed string ( mapping (address => string) public signedString; )
+than get PublicKey (if uploaded to Cryptonomica server and verified by Cryptonomica service) for this fingerprint and verify signature 
 
-``` 
-net.cryptonomica.tomcatweb3j.utilities.Web3jServices.getSignedStringFromSC(String userAddress)
-```
-
-3) fingerprint ( mapping (address => Verification) public verification; )
-
-```
-net.cryptonomica.tomcatweb3j.utilities.Web3jServices.getVerificationStructObj(userAddress).getFingerprint() 
-```
-
-than get PublicKey for this fingerprint and verify signature 
+Code to verify signature: 
 
 ```
 net.cryptonomica.tomcatweb3j.utilities.PGPTools.verifyText(String plainText, PGPPublicKey publicKey)
 ```
 
-if signature verified (```true```) front end should send verification data connected to key with given fingerprint 
-to smart contract () 
+if signature verified (```true```) server send verification data connected to key with given fingerprint 
+to smart contract.
 
 Solidity:
 ```
-// from 'manager' account only
+    // from 'manager' account only
+    // (!) Gas requirement: infinite
     function addVerificationData(
-    address acc,
-    uint _keyCertificateValidUntil,
-    string _firstName,
-    string _lastName,
-    uint _birthDate,
-    string _nationality
-    ) public returns (bool) {
+        address _acc, //
+        string _fingerprint, // "57A5FEE5A34D563B4B85ADF3CE369FD9E77173E5"
+        bytes20 _fingerprintBytes20, // "0x57A5FEE5A34D563B4B85ADF3CE369FD9E77173E5"
+        uint _keyCertificateValidUntil, //
+        string _firstName, //
+        string _lastName, //
+        uint _birthDate, //
+        string _nationality) public {
 ```
 
 Java: 

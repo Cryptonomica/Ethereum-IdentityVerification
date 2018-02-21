@@ -14,12 +14,12 @@
     <!-- SERVLETS BEGIN -->
 
     <servlet>
-        <servlet-name>GetSignedString</servlet-name>
+        <servlet-name>GetVerificationRequestDataServlet</servlet-name>
         <servlet-class>net.cryptonomica.tomcatweb3j.servlets.GetVerificationRequestDataServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>GetSignedString</servlet-name>
-        <url-pattern>/GetSignedString</url-pattern>
+        <servlet-name>GetVerificationRequestDataServlet</servlet-name>
+        <url-pattern>/GetVerificationRequestDataServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>

@@ -60,11 +60,15 @@ function addVerificationData(
         this.firstName = request.getParameter("firstName");
         this.lastName = request.getParameter("lastName");
         // see: https://stackoverflow.com/questions/2646049/what-is-the-most-effective-way-to-create-biginteger-instance-from-int-value
-        this.birthDate = BigInteger.valueOf(
-                Integer.parseUnsignedInt(
-                        request.getParameter("birthDate")
-                )
-        );
+        try { // >>> to work with old keys, where no birthdate field present
+            this.birthDate = BigInteger.valueOf(
+                    Integer.parseUnsignedInt(request.getParameter("birthDate")
+                    )
+            );
+        } catch (Exception e) {
+            this.birthDate = BigInteger.valueOf(0);
+        }
+
         this.nationality = request.getParameter("nationality");
 
         LOG.info(this.toString());

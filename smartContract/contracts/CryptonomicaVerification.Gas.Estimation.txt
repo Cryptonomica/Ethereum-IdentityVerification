@@ -2,37 +2,37 @@
 ======= ./contracts/CryptonomicaVerification.sol:CryptonomicaVerification =======
 Gas estimation:
 construction:
-   infinite + 1300000 = infinite
+   infinite + 1344000 = infinite
 external:
-   addManager(address):	22567
+   addManager(address):	22545
    addVerificationData(address,string,bytes20,uint256,string,string,uint256,string):	infinite
    addressAttached(bytes20):	1179
-   birthDate(address):	718
+   birthDate(address):	696
    bytes32ToString(bytes32):	infinite
-   changeOwnerAccept():	23408
-   changeOwnerStart(address):	22583
-   fingerprint(address):	807
-   firstName(address):	982
+   changeOwnerAccept():	23386
+   changeOwnerStart(address):	22561
+   fingerprint(address):	785
+   firstName(address):	960
    fixWithdrawalAddress(address):	22971
    isManager(address):	1192
-   keyCertificateValidUntil(address):	762
-   lastName(address):	806
+   keyCertificateValidUntil(address):	740
+   lastName(address):	784
    nationality(address):	1136
-   owner():	900
-   priceForVerificationInWei():	417
-   removeManager(address):	22913
+   owner():	878
+   priceForVerificationInWei():	395
+   removeManager(address):	22891
    revokeVerification(address):	infinite
-   revokedOn(address):	872
+   revokedOn(address):	850
    setPriceForVerification(uint256):	23192
-   setWithdrawalAddress(address):	23420
+   setWithdrawalAddress(address):	23398
    signedString(address):	infinite
-   signedStringUploadedOnUnixTime(address):	696
+   signedStringUploadedOnUnixTime(address):	674
    stringToBytes32(string):	infinite
    stringToSignExample():	infinite
    unverifiedFingerprint(address):	infinite
-   uploadSignedString(string,string):	infinite
+   uploadSignedString(string,bytes20,string):	infinite
    verification(address):	infinite
-   verificationAddedOn(address):	674
+   verificationAddedOn(address):	652
    withdrawAllToWithdrawalAddress():	infinite
    withdrawalAddress():	1164
-   withdrawalAddressFixed():	789
+   withdrawalAddressFixed():	767

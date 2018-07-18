@@ -268,6 +268,12 @@ contract CryptonomicaVerification {
         address indexed revokedBy // (2) indexed
     );
 
+    // TODO: add
+    function checkVerification(address _user) public view returns (bool){
+        return (keyCertificateValidUntil(_user) > now) && (revokedOn(_user) == 0);
+    }
+
+
     /* -------------------- Administrative functions : ---------------------- */
 
     // to avoid mistakes: owner (super admin) should be changed in two steps

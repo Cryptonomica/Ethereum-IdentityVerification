@@ -11,4 +11,4 @@ ls ./contracts -a
 
 #
 echo "----- web3j:"
-~/LIBs/web3j-3.2.0/bin/web3j solidity generate ./contracts/CryptonomicaVerification.bin ../src/main/resources/contracts/CryptonomicaVerification.abi -o ../src/main/java -p net.cryptonomica.tomcatweb3j.contracts
+~/LIBs/web3j-3.2.0/bin/web3j solidity generate ./contracts/CryptonomicaVerification.bin ./contracts/CryptonomicaVerification.abi -o ../src/main/java -p net.cryptonomica.tomcatweb3j.contracts

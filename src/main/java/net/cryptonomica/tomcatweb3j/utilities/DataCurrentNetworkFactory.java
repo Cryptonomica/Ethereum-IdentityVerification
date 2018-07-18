@@ -44,7 +44,7 @@ public class DataCurrentNetworkFactory {
 
             if (netVersion.equals("1")) { // MainNet
 
-                String cryptonomicaVerificationContractAddress = "";
+                String cryptonomicaVerificationContractAddress = Constants.MainNetContractAddres;
                 // web3 = Web3j.build(new UnixIpcService("/home/" + USER + "/.ethereum/geth.ipc"));
                 Credentials credentials = Credentials.create(System.getenv("MAINNET_PRIVATE_KEY"));
 

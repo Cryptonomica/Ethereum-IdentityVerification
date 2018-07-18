@@ -27,7 +27,9 @@ public class GetVerificationRequestDataServlet extends HttpServlet {
 
         // (3) get data from contract:
         String unverifiedFingerprint = CryptonomicaVerificationFunctions.getUnverifiedFingerprint(addressStr);
+        //
         String signedString = CryptonomicaVerificationFunctions.getSignedStringFromSC(addressStr);
+        //
         VerificationRequestDataFromSC verificationRequestDataFromSC = new VerificationRequestDataFromSC(
                 unverifiedFingerprint,
                 signedString

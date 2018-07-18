@@ -18,7 +18,8 @@ public class DataCurrentNetworkFactory {
 
     // see: https://github.com/conor10/web3j-javamag/blob/master/src/main/java/org/web3j/javamag/HelloWorld.java
     private static final BigInteger GAS_PRICE = BigInteger.valueOf(20_000_000_000L);
-    private static final BigInteger GAS_LIMIT = BigInteger.valueOf(4_300_000);
+    //    private static final BigInteger GAS_LIMIT = BigInteger.valueOf(4_300_000);
+    private static final BigInteger GAS_LIMIT = BigInteger.valueOf(7_800_000);
 
     public static DataCurrentNetwork getDataCurrentNetworkInstance() {
 
@@ -47,6 +48,12 @@ public class DataCurrentNetworkFactory {
                 String cryptonomicaVerificationContractAddress = Constants.MainNetContractAddres;
                 // web3 = Web3j.build(new UnixIpcService("/home/" + USER + "/.ethereum/geth.ipc"));
                 Credentials credentials = Credentials.create(System.getenv("MAINNET_PRIVATE_KEY"));
+
+                LOG.info("credentials.getAddress() : " + credentials.getAddress());
+
+                if (!credentials.getAddress().equalsIgnoreCase(Constants.MainNetOwnerAddress)) {
+                    LOG.severe("(!) check contract owner address");
+                }
 
                 dataCurrentNetwork.web3j = web3;
                 dataCurrentNetwork.cryptonomicaVerification = CryptonomicaVerification.load(

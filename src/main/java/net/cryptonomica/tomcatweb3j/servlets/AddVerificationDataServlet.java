@@ -41,6 +41,7 @@ public class AddVerificationDataServlet extends HttpServlet {
 
         // (3) send transaction to contract and get transaction receipt
         TransactionReceipt transactionReceipt = CryptonomicaVerificationFunctions.addVerificationData(addVerificationDataObj);
+        LOG.info("Tx Hash" + transactionReceipt.getTransactionHash());
         LOG.info(GSON.toJson(transactionReceipt));
 
         // (4) send response

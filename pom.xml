@@ -29,22 +29,24 @@
             <!--<version>1.47</version>-->
         </dependency>
 
-        <dependency>
-            <!--
-            https://github.com/rubenlagus/TelegramBots
-            https://github.com/rubenlagus/TelegramBots/wiki/Getting-Started
-            see also: https://habrahabr.ru/sandbox/111328/
-            -->
-            <groupId>org.telegram</groupId>
-            <artifactId>telegrambots</artifactId>
-            <version>3.5</version>
-        </dependency>
-        <dependency>
-            <!-- https://github.com/pengrad/java-telegram-bot-api -->
-            <groupId>com.github.pengrad</groupId>
-            <artifactId>java-telegram-bot-api</artifactId>
-            <version>3.4.1</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--
+        https://github.com/rubenlagus/TelegramBots
+        https://github.com/rubenlagus/TelegramBots/wiki/Getting-Started
+        see also: https://habrahabr.ru/sandbox/111328/
+        -->
+        <!--<groupId>org.telegram</groupId>-->
+        <!--<artifactId>telegrambots</artifactId>-->
+        <!--<version>3.6.1</version>-->
+        <!--<version>3.5</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--&lt;!&ndash; https://github.com/pengrad/java-telegram-bot-api &ndash;&gt;-->
+        <!--<groupId>com.github.pengrad</groupId>-->
+        <!--<artifactId>java-telegram-bot-api</artifactId>-->
+        <!--<version>3.4.1</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <!-- https://mvnrepository.com/artifact/org.web3j/core -->
@@ -80,6 +82,12 @@
             <version>3.7</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.11</version>
+        </dependency>
 
         <dependency>
             <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
